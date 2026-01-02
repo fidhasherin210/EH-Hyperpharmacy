@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/600.css';
+@import '@fontsource/dm-sans/700.css';
+
+@layer base {
+:root {
+    --background: 0 0% 99%;
+    --foreground: 207 18% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 207 18% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 207 18% 20%;
+
+    --primary: 207 18% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 207 15% 94%;
+    --secondary-foreground: 207 18% 40%;
+
+    --muted: 207 10% 95%;
+    --muted-foreground: 207 12% 50%;
+
+    --accent: 14 85% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 207 15% 90%;
+    --input: 207 15% 90%;
+    --ring: 14 85% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom pharmacy colors */
+    --slate: 207 18% 45%;
+    --slate-light: 207 15% 94%;
+    --slate-dark: 207 18% 20%;
+    --coral: 14 85% 55%;
+    --coral-light: 14 50% 94%;
+    --coral-dark: 14 85% 45%;
+    --warm-white: 30 20% 98%;
+    
+    /* Glow effects */
+    --glow-coral: 0 0 40px hsl(14 85% 55% / 0.4);
+    --glow-slate: 0 0 40px hsl(207 18% 45% / 0.3);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(207 18% 30% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(207 18% 30% / 0.1), 0 2px 4px -2px hsl(207 18% 30% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(207 18% 30% / 0.1), 0 4px 6px -4px hsl(207 18% 30% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(207 18% 30% / 0.1), 0 8px 10px -6px hsl(207 18% 30% / 0.1);
+    --shadow-glow: 0 4px 20px hsl(14 85% 55% / 0.3);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(207 18% 45%), hsl(207 18% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(14 85% 55%), hsl(14 85% 65%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 99% / 0.1) 0%, hsl(0 0% 99% / 0.95) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(207 10% 98%) 100%);
+    --gradient-hyper: linear-gradient(135deg, hsl(14 85% 55%) 0%, hsl(14 90% 65%) 50%, hsl(25 95% 60%) 100%);
+  }
+
+  .dark {
+    --background: 207 20% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 207 20% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 207 20% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 207 18% 55%;
+    --primary-foreground: 207 20% 10%;
+
+    --secondary: 207 15% 18%;
+    --secondary-foreground: 207 15% 70%;
+
+    --muted: 207 15% 18%;
+    --muted-foreground: 207 12% 60%;
+
+    --accent: 14 75% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 207 15% 20%;
+    --input: 207 15% 20%;
+    --ring: 14 75% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-2;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hyper);
+  }
+
+  .text-gradient-slate {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-coral);
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-slate);
+  }
+
+  .hyper-card {
+    @apply relative overflow-hidden rounded-2xl bg-card border border-border/50 transition-all duration-500;
+  }
+
+  .hyper-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, hsl(14 85% 55% / 0.1) 0%, transparent 50%);
+  }
+
+  .hyper-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .hyper-card:hover {
+    @apply -translate-y-2 shadow-xl border-accent/30;
+  }
+
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background-size: 200% 100%;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bounceIn {
+    from {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes floating {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(14 85% 55% / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(14 85% 55% / 0.6);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
